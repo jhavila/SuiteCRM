@@ -120,6 +120,8 @@ class facebook_helper
             $string .= '</div>';
         }
 
+
+
         if(!empty($story['story'])){
             $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['story'] . '</br>' .$post_link . '</div>';
 
@@ -141,9 +143,9 @@ class facebook_helper
 
         $string = '';
 
-        $string .= "<div style=' margin: 0 auto; background-color: #F7F7F7; height:160px; width:389px; ; border:1px solid #cccccc'>";
+        $string .= "<div style=' margin: 0 auto; background-color: #F7F7F7; height:160px; width:389px; border:1px solid #cccccc'>";
 
-        if (isset($people['to'])) {
+        if (isset($people['to']) && $people['to'][0]['id'] != null && $people['from'][0]['id'] != null) {
             $string .= '<div style="width:50%; height: 65%; float:right;" id="to">';
 
             $i = 0;
@@ -156,6 +158,89 @@ class facebook_helper
 
 
             $string .= '</div>';
+        }
+
+
+        if (isset($people['from'])) {
+            if (isset($people['to']) && $people['to'][0]['id'] != null && $people['from'][0]['id'] != null) {
+            $string .= '<div style="width:50%; height: 65%; float:left;" id="from">';
+
+            $i = 0;
+
+
+            while (count($people['from']) > $i) {
+
+                $string .= '<img style="margin:75px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['from'][$i]['id'] . '/picture>';
+                $string .= '<p style="text-align:center;">' . $people['from'][$i]['name'] . '</p>';
+
+                $i++;
+            }
+
+
+            $string .= '</div>';
+        }else{
+                $string .= '<div style="width:100%; height: 65%; float:left;" id="from">';
+
+                $i = 0;
+
+
+                while (count($people['from']) > $i) {
+
+                    $string .= '<img style="margin:170px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['from'][$i]['id'] . '/picture>';
+                    $string .= '<p style="text-align:center;">' . $people['from'][$i]['name'] . '</p>';
+
+                    $i++;
+                }
+
+
+                $string .= '</div>';
+            }
+        }
+
+        if(!empty($story['story'])){
+            $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['story'] . '</br>' .$post_link . '</div>';
+
+        }
+        if(!empty($story['message'])){
+            $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['message'] . '</br>' .$post_link . '</div>';
+
+        }
+        $string .= "</div>";
+
+        return $string;
+
+
+    }
+
+    function link_type($story)
+    {
+        $people = $this->get_people($story);
+        $post_link = $this->create_post_link($story);
+
+        $string = '';
+
+        $string .= "<div style=' margin: 0 auto; background-color: #F7F7F7; height:160px; width:389px; ; border:1px solid #cccccc'>";
+
+        if (isset($people['to']) && $people['to'][0]['id'] != null) {
+            $string .= '<div style="width:50%; height: 65%; float:right;" id="to">';
+
+            $i = 0;
+            while (count($people['to']) > $i) {
+
+                $string .= '<img style="margin:75px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['to'][$i]['id'] . '/picture>';
+                $string .= '<p style="text-align:center;">' . $people['to'][$i]['name'] . '</p>';
+                $i++;
+            }
+
+
+            $string .= '</div>';
+        }else{
+            $string .= '<div style="width:50%; height: 65%; float:right;" id="to">';
+            $string .= '<img style="margin:75px; margin-bottom:10px; margin-top:20px; width: 50px; height:50px;" src=https://graph.facebook.com/' . $story['application']['id'] . '/picture>';
+            $string .= '<p style="text-align:center;">' . $story['application']['name'] . '</p>';
+            $story['story'] = $story['from']['name'] . ' likes ' . $story['application']['name'];
+            $string .= '</div>';
+
         }
 
 
@@ -181,61 +266,6 @@ class facebook_helper
         }
         if(!empty($story['message'])){
             $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['message'] . '</br>' .$post_link . '</div>';
-
-        }
-        $string .= "</div>";
-
-        return $string;
-
-
-    }
-
-    function link_type($story)
-    {
-        $people = $this->get_people($story);
-
-        $string = '';
-
-        $string .= "<div style=' margin: 0 auto; background-color: #F7F7F7; height:160px; width:389px; ; border:1px solid #cccccc'>";
-
-        if (isset($people['to'])) {
-            $string .= '<div style="width:50%; height: 65%; float:right;" id="to">';
-
-            $i = 0;
-            while (count($people['to']) > $i) {
-
-                $string .= '<img style="margin:75px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['to'][$i]['id'] . '/picture>';
-                $string .= '<p style="text-align:center;">' . $people['to'][$i]['name'] . '</p>';
-                $i++;
-            }
-
-
-            $string .= '</div>';
-        }
-
-
-        if (isset($people['from'])) {
-            $string .= '<div style="width:50%; height: 65%; float:left;" id="from">';
-
-            $i = 0;
-            while (count($people['from']) > $i) {
-
-                $string .= '<img style="margin:75px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['from'][$i]['id'] . '/picture>';
-                $string .= '<p style="text-align:center;">' . $people['from'][$i]['name'] . '</p>';
-
-                $i++;
-            }
-
-
-            $string .= '</div>';
-        }
-
-        if(!empty($story['story'])){
-            $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['story'] . '</div>';
-
-        }
-        if(!empty($story['message'])){
-            $string .= '<div style="width:100%; float:left; text-align:center;">' . $story['message'] . '</div>';
 
         }
         $string .= "</div>";

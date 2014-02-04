@@ -145,7 +145,7 @@ class facebook_helper
 
         $string .= "<div style=' margin: 0 auto; background-color: #F7F7F7; height:160px; width:389px; border:1px solid #cccccc'>";
 
-        if (isset($people['to']) && $people['to'][0]['id'] != null && $people['from'][0]['id'] != null) {
+
             $string .= '<div style="width:50%; height: 65%; float:right;" id="to">';
 
             $i = 0;
@@ -158,11 +158,11 @@ class facebook_helper
 
 
             $string .= '</div>';
-        }
+
 
 
         if (isset($people['from'])) {
-            if (isset($people['to']) && $people['to'][0]['id'] != null && $people['from'][0]['id'] != null) {
+
             $string .= '<div style="width:50%; height: 65%; float:left;" id="from">';
 
             $i = 0;
@@ -178,23 +178,6 @@ class facebook_helper
 
 
             $string .= '</div>';
-        }else{
-                $string .= '<div style="width:100%; height: 65%; float:left;" id="from">';
-
-                $i = 0;
-
-
-                while (count($people['from']) > $i) {
-
-                    $string .= '<img style="margin:170px; margin-bottom:10px; margin-top:20px;" src=https://graph.facebook.com/' . $people['from'][$i]['id'] . '/picture>';
-                    $string .= '<p style="text-align:center;">' . $people['from'][$i]['name'] . '</p>';
-
-                    $i++;
-                }
-
-
-                $string .= '</div>';
-            }
         }
 
         if(!empty($story['story'])){

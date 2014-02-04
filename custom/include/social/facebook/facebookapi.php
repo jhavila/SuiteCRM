@@ -39,8 +39,10 @@ foreach($content['data'] as $story){
 foreach($content['data'] as $story){
 
         $html .= "<div style='width:30%;float:left;padding:25px;height:160px;'>";
+
         $results =  $facebook_helper->process_feed($story);
-        $html .=  "<p style='text-align:center;'>". $results."</p>";
+
+            $html .=  "<p style='text-align:center;'>". $results."</p>";
         $html .= "</div>";
 
 

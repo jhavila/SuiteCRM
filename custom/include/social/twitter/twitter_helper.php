@@ -24,7 +24,6 @@ function format_feed_tweets($db, $array, $limit)
 
     }
 
-    $array['text'] = $db->quote($array['text']);
 
     return $array['text'];
 
@@ -54,7 +53,7 @@ function replace_users($db, $array)
 
     while ($i < $count) {
 
-        $array['text'] = str_replace('@' . $array['entities']['user_mentions'][$i]['screen_name'], "<a href=http://twitter.com/" . $array['entities']['user_mentions'][$i]['screen_name'] . ">" . "@" . $array['entities']['user_mentions'][$i]['screen_name'] . "</a>", $array['text']);
+        $array['text'] = str_replace('@' . $array['entities']['user_mentions'][$i]['screen_name'], "<a style='font-size:22px !important' href=http://twitter.com/" . $array['entities']['user_mentions'][$i]['screen_name'] . ">" . "@" . $array['entities']['user_mentions'][$i]['screen_name'] . "</a>", $array['text']);
         $i++;
     }
 

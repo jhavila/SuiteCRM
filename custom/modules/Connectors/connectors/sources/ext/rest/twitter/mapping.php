@@ -1,5 +1,5 @@
 <?php
-// created: 2014-02-03 12:55:31
+// created: 2014-02-05 12:20:27
 $mapping = array (
   'beans' => 
   array (
@@ -7,6 +7,9 @@ $mapping = array (
     array (
     ),
     'Leads' => 
+    array (
+    ),
+    'Contacts' => 
     array (
     ),
   ),

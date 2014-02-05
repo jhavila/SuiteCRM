@@ -54,12 +54,10 @@ function format_tweets($db,$tweets){
 
     $i = 0;
     $html ='';
-//    $html = "<link rel='stylesheet' type='text/css' href='custom/include/social/twitter/twitter.css'>";
-
-
-    $html .= "<div style='height:400px;overflow:scroll'><table width='100%'>";
-    $html .= '<tr><th><h3>20 Latest Tweets</h3></th></tr>';
+    $html .= "<link rel='stylesheet' type='text/css' href='custom/include/social/social.css'>";
     $html .= "<tr><td><img style='padding:5px;'; src='". $tweets[0]['user']['profile_image_url'] ."'><b style='margin-left:5px; font-size:20px;'>" ."@". $tweets[0]['user']['screen_name'] ."</b></td></tr>";
+    $html .= "<div style='height:400px;overflow:scroll; padding-left: 35px;padding-top:10px;'><table width='100%'>";
+
     $html .= "</table>";
 
 
@@ -76,7 +74,7 @@ function format_tweets($db,$tweets){
             $tweet['text'] = replace_users($db, $tweet);
         }
 
-        $html .= "<div class='tweet' style='width:30%;float:left;padding:25px;height:100px;'>";
+        $html .= "<div class='tweet'>";
         $html .=  "<p>". $tweet['text']."</p>";
         $html .= "</div>";
         $i++;

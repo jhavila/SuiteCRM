@@ -1,0 +1,68 @@
+.facebook_post_container{
+    padding:20px;
+    margin-right:35px;
+    margin-bottom:50px;
+    background-color: #F7F7F7;
+    height:160px;
+    width:500px;
+    border:1px solid #cccccc;
+    float:left;
+
+}
+
+.facebook_post_inner_left{
+  width:50%;
+  height: 65%;
+  float:left;
+}
+
+.facebook_post_solo_img{
+   margin:0 auto;
+   display:block;
+
+}
+.solo_align{
+    margin:10px;
+    text-align: center;
+}
+
+.facebook_post_inner_right{
+    width:50%;
+    height: 65%;
+    float:right;
+}
+
+.facebook_post_img_left{
+    margin:102px;
+    margin-bottom:10px;
+    margin-top:20px;
+}
+
+.facebook_post_img_right{
+    margin:102px;
+    margin-bottom:10px;
+    margin-top:20px;
+}
+
+.facebook_video_picture{
+    padding: 5px;
+    float:left;
+}
+
+.video_description{
+    padding:20px;
+    width:85%;
+}
+
+.text_center{
+    text-align:center;
+}
+
+.post_link{
+    width:100%;
+    margin:5px;
+    float:left;
+    text-align:center;
+}
+
+

@@ -21,10 +21,11 @@ if ($user){
 }else{
     $log = '<a href="' . $loginUrl .'">Login with Facebook</a>';
 }
-$html .= "<div style='height:400px;overflow:scroll'><table width='100%'>";
-$html .= "<tr><th><h3>Facebook Feed</h3></th></tr>";
+$html .= "<link rel='stylesheet' type='text/css' href='custom/include/social/social.css'>";
 $html .= "<tr><td style='padding:5px'><img src=https://graph.facebook.com/" . $different_user['username'] . "/picture>";
-$html .= "<b style='margin-left:5px; font-size:20px;'>".$different_user['first_name'] .  " " . $different_user['last_name'] . "</b></td></tr>";
+$html .= "<b style='margin-left:5px; font-size:20px;'>".$different_user['name'] ."</b></td></tr>";
+$html .= "<div style='height:400px;overflow:scroll; padding-left: 35px;padding-top:10px;'><table width='100%'>";
+
 $html .= "</table>";
 
 
@@ -38,12 +39,12 @@ foreach($content['data'] as $story){
 
 foreach($content['data'] as $story){
 
-        $html .= "<div style='width:30%;float:left;padding:25px;height:160px;'>";
-
+    if($story['type'] != 'link' && $story['type'] != 'video' && $story['type'] != 'photo'){
+        if(isset($story['story']) || isset($story['message'])){
         $results =  $facebook_helper->process_feed($story);
-
-            $html .=  "<p style='text-align:center;'>". $results."</p>";
-        $html .= "</div>";
+        }
+    }
+            $html .=  "<p>". $results."</p>";
 
 
 }

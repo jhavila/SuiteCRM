@@ -297,6 +297,7 @@ class AOR_Report extends Basic {
 
         $delimiter = getDelimiter();
         $csv = '';
+        $csv_field = ''; // hold contents of individual field before output.
         //text/comma-separated-values
 
         $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '".$this->id."' AND deleted = 0 ORDER BY field_order ASC";
@@ -325,7 +326,8 @@ class AOR_Report extends Basic {
 
 
             if($field->display){
-                $csv.= $field->label;
+                $csv_field = $field->label;
+                $csv .= (is_numeric($csv_field)?'':'"') . $csv_field . (is_numeric($csv_field)?'':'"');
                 $csv .= $delimiter;
             }
             ++$i;
@@ -339,9 +341,10 @@ class AOR_Report extends Basic {
             foreach($fields as $name => $att){
                 if($att['display']){
                     if($att['function'] != '' )
-                        $csv .= $row[$name];
+                        $csv_field = $row[$name];
                     else
-                        $csv .= trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView',$row[$name])));
+                        $csv_field = trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView',$row[$name])));
+                    $csv .= (is_numeric($csv_field)?'':'"') . $csv_field . (is_numeric($csv_field)?'':'"');
                     $csv .= $delimiter;
                 }
             }
